@@ -1,5 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
+const generateReadme = require('./src/readme-template.js');
 
 // TODO: Create an array of questions for user input
 const promptUser = () => {
@@ -132,7 +133,7 @@ const promptUser = () => {
             message: '10) Do you want to add tests to your project?',
             default: false
         }
-        // { add test functio here }
+        // { add test function here }
     ])
 }
 
@@ -144,7 +145,9 @@ function writeToFile(fileName, data) {}
 // TODO: Create a function to initialize app
 let init = () => {
     promptUser()
-    .then(answers => console.log(answers))
+    // .then(answers => console.log(answers))
+    .then(answers => generateReadme(answers))
+    .then(template => console.log(template))
 }
 
 // Function call to initialize app
