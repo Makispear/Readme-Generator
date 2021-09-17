@@ -1,3 +1,5 @@
+const fs = require('fs')
+const inquirer = require('inquirer')
 // HOW THE ANSWERS OBJECT WILL LOOK LIKE --------------------------------------
 // {
 //   username: 'masdgfar',
@@ -14,15 +16,42 @@
 //--------------------------------------------------------------------------
 
 
-checkLicense = checker => {
-  if (!checker) {
-    return ''
-  } else {
-    return '* [license coming soon](#license)'
+// checkTests = (checker) => {
+//   if (!checker) {
+//     return '' 
+//   } else {
+//     inquirer.prompt([
+//     {
+//       type: 'input',
+//       name: 'testInput',
+//       message: 'what would you want to test? (required)',
+//       validate: testInput => {
+//         if (testInput) {
+//           return true
+//         } else {
+//           console.log('Please enter your tests!')
+//           return false
+//         }
+//       }
+//     }])
+//   }
+// }
+
+// FUNCTION FOR CHOOSING LICENSE BADGE BASED ON USER CHOICE 
+checkLicenseBadge = checker => {
+  switch(checker) {
+    case ("Apache 2.0 License"):
+      return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+    case ('GNU General Public License v3'):
+      return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
+    default:
+      return ''
   }
+return 
 }
 
-checkTableContent = (checker, infoObj) => {
+// TABLE OF CONTENT IF USER CONFIRMS IT 
+checkTableContent = (checker) => {
   if (!checker) {
     return ''
   } else {
@@ -30,9 +59,9 @@ checkTableContent = (checker, infoObj) => {
   ## Table of Content
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Contribution Guidelines](#contribution-guidelines)
-  * [questions](#questions)
-  ${checkLicense(infoObj.license)}
+  * [Contribution](#contribution-guidelines)
+  * [Questions](#questions)
+  * [License](#license)
   * [Tests](#tests)
   ` 
   }
@@ -42,30 +71,33 @@ const generate = (answers) => {
 const {username, email, title, description, confirmTableContent, installation, usage, contribution, license, tests} = answers
 
   return `
-  # ${title}
-  ## Description
-  ${description}
+# ${title} 
+${checkLicenseBadge(license)}
 
-  ${checkTableContent(confirmTableContent, answers)}
+## Description
+${description}
 
-  ## Installation
-  ${installation}
+${checkTableContent(confirmTableContent)}
 
-  ## Usage 
-  ${usage}
+## Installation
+${installation}
 
-  ## Contribution Guidelines
-  ${contribution}
+## Usage 
+${usage}
 
-  ## Questions
-  For any questions regarding this project please contact me via my [e-mail](${email}) 
-  For further question, please head to my GitHub [${username}](https://github.com/${username}) 
+## Contribution Guidelines
+${contribution}
 
-  ## License
-  ${license}
+## Questions
+For any questions regarding this project please contact me via my [e-mail](${email}) 
+For further question, please head to my GitHub [${username}](https://github.com/${username}) 
 
-  ## Tests
-  ${tests}
+## License
+${checkLicenseBadge(license)}
+${license} 
+
+## Tests
+${tests}
   `
 }
 

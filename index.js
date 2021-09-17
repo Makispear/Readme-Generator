@@ -16,7 +16,7 @@ const promptUser = () => {
             // USERNAME 
             type: 'input',
             name: 'username',
-            message: '1) What is your GitHub username? (required)',
+            message: 'Enter your GitHub username? (required)',
             validate: username => {
                 if (username) {
                     return true
@@ -30,7 +30,7 @@ const promptUser = () => {
             // EMAIL 
             type: 'input',
             name: 'email',
-            message: '2) What is your email address? (required)',
+            message: 'Enter your email address? (required)',
             validate: email => {
                 if (email) {
                     return true
@@ -44,7 +44,7 @@ const promptUser = () => {
             // TITLE 
             type: "input",
             name: "title",
-            message: `3) What is the name of your project's title? (required)`,
+            message: `Enter your project's title? (required)`,
             validate: titleInput => {
             if (titleInput) {
                 return true
@@ -57,7 +57,7 @@ const promptUser = () => {
             // DESCRIPTION 
             type: "input",
             name: 'description',
-            message: '4) What do you want to add in the "description" section? (required)',
+            message: 'What do you want to add in the "description" section? (required)',
             validate: description => {
                 if (description) {
                     return true
@@ -71,32 +71,19 @@ const promptUser = () => {
             // TABLE OF CONTENT 
             type: "confirm",
             name: 'confirmTableContent',
-            message: '5) Would you like to add a "table of content" section? (Optional)',
+            message: 'Would you like to add a "table of content" section? (Optional)',
             default: true
-        },
-        {
-            when: ({confirmTableContent}) => {
-                if (confirmTableContent === true) {
-                    console.log('true')
-                    // return a function 
-                    return
-                } else {
-                    console.log('false')
-                    // return false 
-                    return 
-                }
-            }
         },
         {
             // INSTALLATION 
             type: "input",
             name: 'installation',
-            message: '6) How do you install your project? (required)',
+            message: 'How do you install your project? Enter installation instructions. (required)',
             validate: installationInput => {
                 if (installationInput) {
                     return true
                 } else {
-                    console.log('Please Enter A Description For Your Project!')
+                    console.log('Please Enter Installation Instructions For Your Project!')
                     return false
                 }
             }
@@ -105,12 +92,12 @@ const promptUser = () => {
             // USAGE 
             type: "input",
             name: 'usage',
-            message: '7) How do you use your project? Add instructions. (required)',
+            message: 'How do you use your project? Add instructions. (required)',
             validate: usageInput => {
                 if (usageInput) {
                     return true
                 } else {
-                    console.log('Please Enter A Description For Your Project!')
+                    console.log('Please Enter Usage Instructions For Your Project!')
                     return false
                 }
             }
@@ -119,22 +106,43 @@ const promptUser = () => {
             // CONTRIBUTION 
             type: 'input',
             name: 'contribution',
-            message: '8) What are the contribution guidelines?'
+            message: 'What are your contribution guidelines?'
         },
         {
             // LICENSE 
             type: "rawlist",
             name: 'license',
-            message: '9) What license do you want your project to have? (required)',
-            choices: ["choice 1", "choice 2", "choice 3"]
+            message: 'What license do you want your project to have? (required)',
+            choices: [
+"Apache 2.0 License", // [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+"GNU General Public License v3", // [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+"The MIT License", // [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+"BSD 2-Clause License", // [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
+"BSD 3-Clause License", // [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+"Boost Software License 1.0",   //[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+"Creative Commons Zero v1.0 Universal", //[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+"Eclipse Public License 2.0", // [![License](https://img.shields.io/static/v1?label=License&message=Epl%202.1&color=red)](https://opensource.org/licenses/BSD-2-Clause)
+"GNU Affero General Public License v3.0",   // [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+"GNU General Public License 2.0", // [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+"GNU Lesser General Public License 2.1", // [![License](https://img.shields.io/badge/License-LGPL%202.1-yellowgreen)](https://opensource.org/licenses/BSD-2-Clause)
+"Mozilla Public License 2.0", // [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+"The Unlicense" // [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+                ]
         },
         {
-            type: 'confirm',
+            type: 'input',
             name: 'tests',
-            message: '10) Do you want to add tests to your project?',
-            default: false
+            message: 'Provide some tests for your project: (required)',
+            validate: testInput => {
+                if (testInput) {
+                    return true
+                } else {
+                    console.log('Please Enter At Least One Test For Your Project!')
+                    return false
+                }
+            }
         }
-        // { add test function here }
+       
     ])
 }
 
