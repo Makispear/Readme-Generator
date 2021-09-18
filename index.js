@@ -6,9 +6,9 @@ const writeFile = require('./utils/generatePage.js');
 // TODO: Create an array of questions for user input
 const promptUser = () => {
     console.log(`
-    =======================
-    Answer these questions: 
-    =======================
+======================
+Fill in the Following: 
+======================
     `)
     return inquirer
     .prompt([
@@ -106,7 +106,15 @@ const promptUser = () => {
             // CONTRIBUTION 
             type: 'input',
             name: 'contribution',
-            message: 'What are your contribution guidelines?'
+            message: 'What are your contribution guidelines? (required)',
+            validate: contributionInput => {
+                if (contributionInput) {
+                    return true
+                } else {
+                    console.log('Please Enter Your Contribution Guidelines For Your Project!')
+                    return false
+                }
+            }
         },
         {
             // LICENSE 
@@ -148,18 +156,17 @@ const promptUser = () => {
 
 
 // TODO: Create a function to write README file
-function writeToFile(data) {
-    writeFile(data)
-}
+const writeToFile = data =>  writeFile(data)
 
 
 // TODO: Create a function to initialize app
-let init = () => {
+const init = () => {
     promptUser()
-    .then(data => generateMarkdown(data))
-    .then(template => writeToFile(template))
+    .then(answers => generateMarkdown(answers))
+    .then(generatedTemplate => writeToFile(generatedTemplate))
     .catch(err => console.log(err))
 }
 
 // Function call to initialize app
+// THIS IS WHERE THE APP STARTS 
 init();
