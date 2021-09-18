@@ -8,7 +8,6 @@ licenseInfoObj = [
     license: 'GNU General Public License v3',
     link: '(https://www.gnu.org/licenses/gpl-3.0)',
     badge: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)]"//2
-     
   },
   {
     license: 'The MIT License',
@@ -67,25 +66,29 @@ licenseInfoObj = [
   },
 ]
 
+// filtering the license 
+const filteredLicense = license => {
+  const choice = licenseInfoObj.filter(obj => {
+    if (obj.license === license) {
+      return true
+    }
+  })
+  return choice
+}
+
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-renderLicenseBadge = license => {
-licenseInfoObj.forEach(obj => {
-  if (obj.license === license) {
-    return obj.badge
-  }
-})
+const renderLicenseBadge = license => {
+const mapped = filteredLicense(license).map(result => result.badge)
+return `${mapped.badge}`
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 renderLicenseLink = license => {
-licenseInfoObj.forEach(obj => {
-  if (obj.license === license) {
-    return obj.link
-  }
-})
+  const mapped = filteredLicense(license).map(result => result.link)
+  return `${mapped.link}`
 }
 
 
@@ -121,7 +124,7 @@ generateMarkdown = data => {
 
   return `
 # ${title} 
-${renderLicenseBadge(license).join(renderLicenseLink(license))}
+${renderLicenseBadge(license)}${(renderLicenseLink(license))}
 
 ## Description
 ${description}
