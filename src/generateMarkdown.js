@@ -37,7 +37,7 @@ licenseInfoObj = [
   {
     license: 'Eclipse Public License 2.0',
     link: `(httpshttps://opensource.org/licenses/EPL-2.0)`,
-    badge: "[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)]"//8
+    badge: "[![License: GPL v2](https://img.shields.io/badge/License-EPL%20v2-blue.svg)]"//8
   },
   {
     license: 'GNU Affero General Public License v3.0',
@@ -66,7 +66,7 @@ licenseInfoObj = [
   },
 ]
 
-// filtering the license 
+// This code gets the chosen license object 
 const filteredLicense = license => {
   const choice = licenseInfoObj.filter(obj => {
     if (obj.license === license) {

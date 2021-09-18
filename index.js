@@ -1,8 +1,8 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown');
-const writeFile = require('./utils/generateMarkdown');
-
+const generateMarkdown = require('./src/generateMarkdown.js');
+const writeFile = require('./utils/generatePage.js');
+ 
 // TODO: Create an array of questions for user input
 const promptUser = () => {
     console.log(`
@@ -114,19 +114,19 @@ const promptUser = () => {
             name: 'license',
             message: 'What license do you want your project to have? (required)',
             choices: [
-"Apache 2.0 License", // [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-"GNU General Public License v3", // [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-"The MIT License", // [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-"BSD 2-Clause License", // [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
-"BSD 3-Clause License", // [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-"Boost Software License 1.0",   //[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-"Creative Commons Zero v1.0 Universal", //[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
-"Eclipse Public License 2.0", // [![License](https://img.shields.io/static/v1?label=License&message=Epl%202.1&color=red)](https://opensource.org/licenses/BSD-2-Clause)
-"GNU Affero General Public License v3.0",   // [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-"GNU General Public License 2.0", // [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-"GNU Lesser General Public License 2.1", // [![License](https://img.shields.io/badge/License-LGPL%202.1-yellowgreen)](https://opensource.org/licenses/BSD-2-Clause)
-"Mozilla Public License 2.0", // [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-"The Unlicense" // [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+                "Apache 2.0 License",
+                "GNU General Public License v3",
+                "The MIT License",
+                "BSD 2-Clause License", 
+                "BSD 3-Clause License",
+                "Boost Software License 1.0", 
+                "Creative Commons Zero v1.0 Universal",
+                "Eclipse Public License 2.0", 
+                "GNU Affero General Public License v3.0",   
+                "GNU General Public License 2.0", 
+                "GNU Lesser General Public License 2.1", 
+                "Mozilla Public License 2.0", 
+                "The Unlicense" 
                 ]
         },
         {
@@ -148,17 +148,17 @@ const promptUser = () => {
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-
+function writeToFile(data) {
+    writeFile(data)
 }
 
 
 // TODO: Create a function to initialize app
 let init = () => {
     promptUser()
-    // .then(answers => console.log(answers))
     .then(data => generateMarkdown(data))
-    .then(template => console.log(template))
+    .then(template => writeToFile(template))
+    .catch(err => console.log(err))
 }
 
 // Function call to initialize app
