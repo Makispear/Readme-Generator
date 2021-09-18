@@ -81,14 +81,14 @@ const filteredLicense = license => {
 // If there is no license, return an empty string
 const renderLicenseBadge = license => {
 const mapped = filteredLicense(license).map(result => result.badge)
-return `${mapped.badge}`
+return mapped
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 renderLicenseLink = license => {
   const mapped = filteredLicense(license).map(result => result.link)
-  return `${mapped.link}`
+  return mapped
 }
 
 
@@ -113,8 +113,9 @@ renderContentTable = accepted => {
 function renderLicenseSection(license) {
   return`
 ## License
-${renderLicenseBadge(license).concat(renderLicenseLink(license))}
+${renderLicenseBadge(license)}${renderLicenseLink(license)}
 ${license}
+* For more information about this license click the license badge!
 `
 }
 
