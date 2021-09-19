@@ -8,10 +8,7 @@ const writeFile = markdown => {
                 reject(err)
                 return
             }
-            resolve({
-                ok: true,
-                message: 'File created'
-            })
+            resolve(console.log("README.md file has been generated!"))
             }
         )
     })

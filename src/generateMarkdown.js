@@ -124,7 +124,8 @@ generateMarkdown = data => {
   const {username, email, title, description, confirmTableContent, installation, usage, contribution, license, tests} = data
 
   return `
-# ${title} 
+# ${title}
+
 ${renderLicenseBadge(license)}${(renderLicenseLink(license))}
 
 ## Description
