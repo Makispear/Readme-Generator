@@ -92,7 +92,7 @@ renderLicenseLink = license => {
 }
 
 
-renderContentTable = accepted => {
+renderTableOfContent = accepted => {
   if (!accepted) {
     return ''
   } else {
@@ -131,7 +131,7 @@ ${renderLicenseBadge(license)}${(renderLicenseLink(license))}
 ## Description
 ${description}
 
-${renderContentTable(confirmTableContent)}
+${renderTableOfContent(confirmTableContent)}
 
 ## Installation
 ${installation}
